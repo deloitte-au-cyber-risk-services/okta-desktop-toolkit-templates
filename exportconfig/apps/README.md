@@ -7,6 +7,49 @@ This readme provides details on how to use the Okta APIs to make changes to the 
 | _{{this.label}}_ | `{{this.id}}` | ![`{{this._links.logo.[0].type}}`]({{this._links.logo.[0].href}}) | `{{this.signOnMode}}` | [`{{this._name}}.json`]({{this._name}}.json) |
 {{/each}}
 
+## Application Details
+{{#each data}}
+### _{{this.label}}_  
+Application Id: `{{this.id}}`  
+Application Type: `{{this.signOnMode}}`  
+Status: `{{this.status}}`  
+Created: `{{this.created}}`  
+Updated: `{{this.lastUpdated}}`  
+{{#if this.settings.oauthClient}}  
+Initiate Login URI: `{{this.settings.oauthClient.initiate_login_uri}}`  
+{{/if}}
+
+{{#if this.groupAssignments}}  
+### Group Assignments
+{{#each this.groupAssignments}}
+- `{{this.profile.name}}`  
+{{/each}}
+{{/if}}
+
+{{#if this.settings.oauthClient}}  
+#### Response Types
+{{#each this.settings.oauthClient.response_types}}
+- `{{this}}`
+{{/each}}
+
+#### Grant Types
+{{#each this.settings.oauthClient.grant_types}}
+- `{{this}}`
+{{/each}}
+
+#### Redirect URIs
+{{#each this.settings.oauthClient.redirect_uris}}
+- `{{this}}`
+{{/each}}
+
+#### Post Logout Redirect URIs
+{{#each this.settings.oauthClient.post_logout_redirect_uris}}
+- `{{this}}`
+{{/each}}
+
+{{/if}}
+{{/each}}
+
 # APIs
 ## Get Application
 Used to retreive details of the application in Okta
